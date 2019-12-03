@@ -1,0 +1,54 @@
+﻿---------------------------------------------------------
+# Exploit Title: Wordpress 5.3 - Cross-Site Scripting / Local File Inclusion
+# Google Dork: N/A
+# Date: 2019-12-03
+# Exploit Author: Unkn0wn (0x9a@tuta.io)
+# Vendor Homepage: https://wordpress.com
+# Software Link: https://wordpress.org/wordpress-5.3.zip
+# Version: 5.3
+# Tested on: Ubuntu & XAMPP
+# CVE : N/A
+---------------------------------------------------------
+Description:
+This vulnerability (XSS / LFI) occurs in the WordPress title.
+You can use it with a xss payload when you send new post!
+Now let's explain how it happens.
+
+PoC "XSS" wp_using_themes():
+First in the "template-loader.php" file in lines "85,86" We can see the following code:
+*
+if ( ! $template ) {
+$template = get_index_template();
+
+*
+And finally the theme returns for us:
+"96 - 105" lines
+*
+
+This code invokes Index page of the theme's for example (Twenty_Twenty)
+Now we see "index.php" twenty theme in lines " 62 - 64 " wp_kses_post :
+*
+<?php if ( $archive_title ) { ?>
+<h1 class="archive-title"><?php echo wp_kses_post( $archive_title ); ?></h1>
+<?php } ?>
+*
+return for us XSS Payload in title web index page!this is Hide.
+Demo:
+https://cdn1.imggmi.com/uploads/2019/12/3/e56e3cf112bb2cf78e78075120e14ea1-full.png
+https://cdn1.imggmi.com/uploads/2019/12/3/4f952dda2f01edc88460b93473a32ba7-full.png
+----------------------------------------------------------------
+PoC "LFI" wp_using_themes():
+When we load a wordpress theme in "template-loader.php" in lines "
+if ( ! $template ) {
+$template = get_index_template();
+
+we can set LFI payload in name theme for use it!
+and in finally in line "98"
+*
+include( $template );
+*
+payload us activity!
+----------------------------------------------------------
+# We Are : AloneGhost - VeNoM - Agent Haze - Old_One - Unkn0wn
+# https://Github.com/0x9a
+
