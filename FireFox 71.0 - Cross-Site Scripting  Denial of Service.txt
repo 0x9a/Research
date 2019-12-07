@@ -1,0 +1,30 @@
+﻿---------------------------------------------------------
+# Exploit Title: FireFox 71.0 - Cross-Site Scripting / Denial of Service
+# Google Dork: N/A
+# Date: 2019-12-06
+# Exploit Author: Unkn0wn (0x9a@tuta.io)
+# Vendor Homepage: mozilla.org/
+# Software Link: https://www.mozilla.org/en-US/firefox/download
+# Version: 71.0
+# Tested on: Ubuntu
+# CVE : N/A
+---------------------------------------------------------
+Description:
+This vulnerability (XSS)occurs in the FireFox Console.
+You can use it with a xss payload when you visit to every website for see your cookie!
+or you can use it for Denial Of Service attack for crach firefox software.
+Now let's explain how it happens.
+
+Step to Step (windows.document):
+1- Open your firefox 
+2- Go to "Inspect Element"
+3- Open Console
+4- type your XSS payload "ex:window.document(alert(document.cookie))" or dos javascript code 
+
+Demo:
+https://cdn1.imggmi.com/uploads/2019/12/6/eee38b53fa461742e1bcc89cd6debd46-full.png
+----------------------------------------------------------
+# We Are : AloneGhost - VeNoM - Agent Haze - Old_One - Unkn0wn
+# https://Github.com/0x9a
+# https:/t.me/Bl4ckC0des
+
