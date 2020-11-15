@@ -1,0 +1,24 @@
+---------------------------------------------------------
+# Exploit Title: Developed by:Phoenix Creation - SQL Injection
+# Google Dork: N/A
+# Date: 2020-11-15
+# Exploit Author: Backdoor Security Research
+# Contact us : btm@tutanota.de
+# Vendor Homepage: http://www.phoenixweb.in/
+# Software Link: http://www.phoenixweb.in/
+# Version: -
+# Tested on: Ubuntu
+# CVE : N/A
+---------------------------------------------------------
+
+Demo:
+https://www.ktkingtiger.com/pro_details.php?cat_id=5[SQL Injection]
+http://www.asconterminal.com/products-detail.php?id=20/Al.%20Line%20Tap%20Connectors[SQL Injection]
+http://www.astrovastulife.com/products-detail.php?id=5[SQL Injection]
+
+----------------------------------------------------------
+# Discovred : Unkn0wn (0x9a@tutanota.com)
+# Visit: https://t.me/BackdoorTm
+#
+# "Backdoor Security Research" Part of " Backdoor Team "
+# https://cxsecurity.com/issue/WLB-2020110118
